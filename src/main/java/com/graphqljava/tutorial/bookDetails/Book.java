@@ -2,6 +2,7 @@ package com.graphqljava.tutorial.bookDetails;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 record Book(String id, String name, int pageCount, String authorId) {
 
@@ -13,6 +14,21 @@ record Book(String id, String name, int pageCount, String authorId) {
 
     public static Book getById(String id) {
         return books.stream().filter(book -> book.id().equals(id)).findFirst().orElse(null);
+    }
+
+    public static List<Book> getBooks(List<String> ids) {
+        return
+        books.stream()
+                .filter(book -> ids.contains(book.id()))
+                .collect(Collectors.toList());
+    }
+
+    public static Book addBook(BookInput book) {
+
+        Book newBook = new Book(book.getId(), book.getName(), book.getPageCount(), book.getAuthorId());
+
+        books.add(newBook);
+        return newBook;
     }
 
 }

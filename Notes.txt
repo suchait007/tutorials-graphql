@@ -1,0 +1,61 @@
+query {
+  bookById(id: "book-1") {
+    id
+    name
+    pageCount
+    author {
+      id
+      firstName
+    }
+  }
+}
+----------------------------------------------------------------
+{
+  findBooks(ids: ["book-1", "book-2"]) {
+    id
+    name
+    pageCount
+    author {
+      id
+      firstName
+    }
+  }
+}
+
+{
+  "data": {
+    "findBooks": [
+      {
+        "id": "book-1",
+        "name": "Harry Potter and the Philosopher's Stone",
+        "pageCount": 223,
+        "author": {
+          "id": "author-1",
+          "firstName": "Joanne"
+        }
+      },
+      {
+        "id": "book-2",
+        "name": "Moby Dick",
+        "pageCount": 635,
+        "author": {
+          "id": "author-2",
+          "firstName": "Herman"
+        }
+      }
+    ]
+  }
+}
+
+----------------------------------------------------------------
+mutation {
+  addBook(bookInput: {
+    id: "12345"
+    name: "suchait"
+    pageCount: 12
+    authorId: "author-12345"
+  }) {
+    id
+    name
+  }
+}
